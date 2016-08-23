@@ -1,0 +1,8 @@
+<h1>Create your account</h1>
+
+<%= simple_form_for @user do |user_fields| %>
+  <%= user_fields.input :email %>
+  <%= user_fields.input :password %>
+  <%= user_fields.input :password_confirmation %>
+  <%= user_fields.button :submit %>
+<% end %>

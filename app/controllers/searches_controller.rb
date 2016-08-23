@@ -1,6 +1,4 @@
-class SearchesController < ApplicationController
-
-  
+class SearchesController < ApplicationController  
 
   def index
     @streets = street_names
@@ -17,3 +15,4 @@ class SearchesController < ApplicationController
 
 
 end
+

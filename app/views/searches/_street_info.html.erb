@@ -3,5 +3,6 @@
   <td><%= result["side"] %></td>
   <td>From <%= result["from"] %> to <%= result["to"] %></td>
   <td><%= schedule(result) %></td>
+  <td><%= render partial: "searches/notify", locals: {street_id: result["crossstreetmainid"]} %></td>
 </tr>
 

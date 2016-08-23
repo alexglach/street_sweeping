@@ -1,52 +1,49 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
+  
+
   def client
     SODA::Client.new({:domain => "data.cityofboston.gov", :app_token => "RSqcJ79LA7uJL4Ssu3wXoGvpp"})
   end
 
-  def schedule(result)
-    output = "Every "
-    unless result["week1"] == "True" && result["week2"] == "True" && result["week3"] == "True" && result["week4"] == "True" && result["week5"] == "True"
-      if result["week1"] == "True"
-        output += "first, "
-      elsif result["week2"] == "True"
-        output += "second, "
-      elsif result["week3"] == "True"
-        output += "third, " 
-      elsif result["week4"] == "True"
-        output += "fourth, "
-      elsif result["week5"] == "True"
-        output += "fifth, "
-      end
-      output[-2..-1] = " "
-    end
-    if result["monday"] == "True" && result["tuesday"] == "True" && result["wednesday"] == "True" && result["thursday"] == "True" && result["friday"] == "True" && result["saturday"] == "True" && result["sunday"] == "True"
-      output += "day from "
-    else
-      if result["monday"] == "True"
-        output += "Monday, "
-      elsif result["tuesday"] == "True"
-        output += "Tuesday, "
-      elsif result["wednesday"] == "True"
-        output += "Wednesday, " 
-      elsif result["thursday"] == "True"
-        output += "Thursday, " 
-      elsif result["friday"] == "True"
-        output += "Friday, " 
-      elsif result["saturday"] == "True"
-        output += "Saturday, " 
-      elsif result["sunday"] == "True"
-        output += "Sunday, "
-      end
-      output[-2..-1] = " from "
-    end
-    output += result["starttime"].to_time.strftime("%l %p") 
-    output += " to "
-    output += result["endtime"].to_time.strftime("%l %p")
-    output
+  private 
+
+  def sign_in(user)
+    user.regenerate_auth_token
+    cookies[:auth_token] = user.auth_token
+    @current_user = user
   end
-  helper_method :schedule
+
+  def permanent_sign_in(user)
+    user.regenerate_auth_token
+    cookies.permanent[:auth_token] = user.auth_token
+    @current_user = user
+  end
+
+  def sign_out
+    @current_user = nil
+    cookies.delete(:auth_token)
+  end
+
+  def current_user
+    @current_user ||= User.find_by_auth_token(cookies[:auth_token]) if cookies[:auth_token]
+  end
+  helper_method :current_user
+
+  def signed_in_user?
+    !!current_user
+  end
+  helper_method :signed_in_user?
+
+  def require_login
+    unless signed_in_user?
+      flash[:danger] = "Not authorized, please sign in!"
+      redirect_to root_path
+    end
+  end
+
+ 
 
   def street_names
     ["A St",

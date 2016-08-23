@@ -1,0 +1,10 @@
+<% if signed_in_user? %>
+  <% if current_user.saved_streets.any?{|s| s.street_id == street_id} %>
+    <%= link_to "Remove from Saved Streets", saved_street_path(current_user.saved_street(street_id)), method: "delete", class:"btn btn-danger" %>
+  <% else %>
+    <%= link_to "Save To Your Streets", saved_streets_path(street_id: street_id), method: "post", class:"btn btn-primary" %>
+  <% end %>
+  
+<% else %>
+  <%= link_to "Sign Up For Notifications", new_user_path, class:"btn btn-primary" %>
+<% end %>
