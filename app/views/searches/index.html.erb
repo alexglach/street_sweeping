@@ -1,0 +1,23 @@
+<h1>Choose Your Street</h1>
+
+<%= form_tag searches_path, :method => 'get' do %>
+  <%= select_tag :street, options_for_select(@streets) %>
+  <%= submit_tag "Search", class:"btn btn-primary" %>
+<% end %>
+
+<% if @results %>
+  <h1>Street Sweeping Info for <%= "#{@street}" %></h1>
+  <div class="table-responsive">
+    <table class="table table-striped table-hover table-condensed">
+      <tr>
+        <th>Street</th>
+        <th>Side</th>
+        <th>Between</th>
+        <th>Schedule</th>
+      </tr>
+      <% @results.each do |result| %>
+        <%= render partial: "street_info", locals: {result: result} %>
+      <% end %>
+    </table>
+  </div>
+<% end %>
