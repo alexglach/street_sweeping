@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action :require_login, except: [:new, :create]
+  before_action :require_current_user, only: [:edit, :update, :destroy]
 
   def index
 
@@ -23,8 +25,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = current_user
-    @saved_streets = @user.get_saved_streets(client)
+    @saved_streets = current_user.get_saved_streets(client)
   end
 
   def edit
