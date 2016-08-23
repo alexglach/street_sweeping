@@ -1,20 +1,28 @@
 <h1>Your Account</h1>
 <h2>Email: <%= current_user.email %></h2>
 
-<h3>Your saved street sweeping info</h3>
-<div class="table-responsive">
-  <table class="table table-striped table-hover table-condensed">
-    <tr>
-      <th>Street</th>
-      <th>Side</th>
-      <th>Between</th>
-      <th>Schedule</th>
-      <th></th>
-    </tr>
-    <% @saved_streets.each do |saved_street| %>
-      <%= render partial: "searches/street_info", locals: {result: saved_street} %>
-    <% end %>
-  </table>
-</div>
+<% if current_user.saved_streets.empty? %>
+
+  <h3>You have no saved street sweeping info</h3>
+
+<% else %>
+
+  <h3>Below is your saved street sweeping info. You will receive an email notification at the email address listed above on the night before street sweeping.</h3>
+  <div class="table-responsive">
+    <table class="table table-striped table-hover table-condensed">
+      <tr>
+        <th>Street</th>
+        <th>Side</th>
+        <th>Between</th>
+        <th>Schedule</th>
+        <th></th>
+      </tr>
+      <% @saved_streets.each do |saved_street| %>
+        <%= render partial: "searches/street_info", locals: {result: saved_street} %>
+      <% end %>
+    </table>
+  </div>
+
+<% end %>
 
 <%= link_to "Edit Your Account", edit_user_path(current_user) %>
