@@ -9,10 +9,10 @@
       <th>Side</th>
       <th>Between</th>
       <th>Schedule</th>
-      <th>Notification</th>
+      <th></th>
     </tr>
-    <%= @saved_streets.each do |saved_street| %>
-      <%= render partial: "searches/street_info", locals: {result: saved_street[0]} %>
+    <% @saved_streets.each do |saved_street| %>
+      <%= render partial: "searches/street_info", locals: {result: saved_street} %>
     <% end %>
   </table>
 </div>

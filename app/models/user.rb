@@ -18,7 +18,7 @@ class User < ApplicationRecord
   def get_saved_streets(client)
     saved_street_array = []
     saved_streets.each do |saved_street|
-      saved_street_array << client.get("wisd-cxpy", {:crossstreetmainid => "#{saved_street.street_id}"})
+      saved_street_array << client.get("wisd-cxpy", {:crossstreetmainid => "#{saved_street.street_id}"}).first
     end
     saved_street_array
   end
