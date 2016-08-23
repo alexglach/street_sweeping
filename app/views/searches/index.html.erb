@@ -1,4 +1,6 @@
-<h1>Choose Your Street</h1>
+<h3> Welcome to Boston Street Sweeping Notifications. Use this tool to never get towed again. Just choose your street below to see what days of the week different stretches of the street can cleaned.</h3>
+
+<h3>Choose Your Street</h3>
 
 <%= form_tag searches_path, :method => 'get' do %>
   <%= select_tag :street, options_for_select(@streets) %>

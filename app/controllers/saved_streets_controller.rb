@@ -4,10 +4,10 @@ class SavedStreetsController < ApplicationController
     @saved_street = current_user.saved_streets.build
     @saved_street.street_id = params[:street_id]
     if @saved_street.save
-      flash.now[:success] = "Street saved"
+      flash[:success] = "Street saved to your account"
       redirect_to request.referrer
     else
-      flash.now[:danger] = "Could not save street"
+      flash[:danger] = "Could not save street"
       render root_path
     end
   end
