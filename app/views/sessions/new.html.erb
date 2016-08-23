@@ -1,0 +1,15 @@
+<div class="col-xs-6 col-xs-offset-3">
+  <h2>Log in to your account</h2>
+  <form action="/session" accept-charset="UTF-8" method="post">
+    <div class="form-group">
+      <input name="utf8" type="hidden" value="✓">
+      <input type="hidden" name="authenticity_token"
+  value="<%= form_authenticity_token %>">
+      <input type="text" name="email" id="email" class="form-control" placeholder="Email">
+     
+      <input type="password" name="password" id="password" class="form-control" placeholder="Password">
+     
+      <input type="submit" name="commit" value="Log In!" class="btn btn-primary">
+    </div>
+  </form>
+</div>

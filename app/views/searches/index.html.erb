@@ -7,10 +7,6 @@
 
 <% if @results %>
   <h1>Street Sweeping Info for <%= "#{@street}" %></h1>
-  <h3>By clicking "Save To Your Sheets", you will receive an email notification at the email address associated with your account the night before street sweeping.</h3>
-  <% unless signed_in_user? %>
-  <h4>Don't have an account. <%= link_to "Click here", new_user_path %> to sign up.</h4>
-  <% end %>
   <div class="table-responsive">
     <table class="table table-striped table-hover table-condensed">
       <tr>
@@ -25,4 +21,10 @@
       <% end %>
     </table>
   </div>
+  <% if signed_in_user? %>
+    <h3>By clicking "Save To Your Sheets", you will receive an email notification at the email address associated with your account the night before street sweeping.</h3>
+    <h4><%= link_to "View Your Account", user_path(current_user) %></h4>
+  <% else %>
+    <h4>Don't have an account? <%= link_to "Click here", new_user_path %> to sign up.</h4>
+  <% end %>
 <% end %>
