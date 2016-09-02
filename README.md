@@ -1,4 +1,4 @@
-# README
+# Boston Street Sweeping Notifications
 
 This app provides Street Sweeping Notifications for Boston residents and visitors. It uses data provided by the City of Boston's Open Data API, available here: https://data.cityofboston.gov/City-Services/Street-Sweeping-Schedules/755x-x44q. 
 
