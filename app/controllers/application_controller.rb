@@ -1,7 +1,16 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
-  
+  require 'uri'
+
+  def map_url(result)
+    base_url = "https://www.google.com/maps?q="
+    base_url += URI.encode(result["street"]) + URI.encode("&")
+    base_url += URI.encode(result["from"]) + URI.encode("&")
+
+    result["from"]
+  end
+
 
   def client
     SODA::Client.new({:domain => "data.cityofboston.gov", :app_token => "RSqcJ79LA7uJL4Ssu3wXoGvpp"})

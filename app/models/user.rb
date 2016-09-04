@@ -35,4 +35,14 @@ class User < ApplicationRecord
     generate_token
     self.save!
   end
+
+  class << self
+    def welcome_email(id)
+      user = User.find(id)
+      UserMailer.welcome(user).deliver
+    end
+
+    handle_asynchronously :welcome_email, run_at: Proc.new { 5.seconds.from_now }
+
+  end
 end
