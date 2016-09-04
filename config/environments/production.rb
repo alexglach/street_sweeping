@@ -18,7 +18,7 @@ Rails.application.configure do
   # Rails also needs to know where your app is
   #   located to properly configure sending of emails
   config.action_mailer.default_url_options = {
-    :host => 'www.street-sweeping-bos.herokuapp.com',
+    :host => 'street-sweeping-bos.herokuapp.com',
   }
 
   # Eager load code on boot. This eager loads most of Rails and
